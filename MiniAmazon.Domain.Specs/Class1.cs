@@ -6,20 +6,9 @@ using Machine.Specifications;
 
 namespace MiniAmazon.Domain.Specs
 {
-    public class when_something
+    public class Class1
     {
-        private Establish context = () =>
-            {
-                context
-            };
-
-        private Because of = () => {
-                                       _result = null;
-        };
-
-        private It should_do_something = () =>
-            {
-                it
-            };
+        
     }
+
 }
