@@ -115,9 +115,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\NinjectDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,12 +138,23 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
-    <Folder Include="Infrastructure\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MiniAmazon.Data\MiniAmazon.Data.csproj">
+      <Project>{ED9182BF-61B9-4F2B-B400-39127FBFA236}</Project>
+      <Name>MiniAmazon.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MiniAmazon.Domain\MiniAmazon.Domain.csproj">
+      <Project>{81D9F7D3-FE9B-4E55-8876-102311DAD57A}</Project>
+      <Name>MiniAmazon.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
