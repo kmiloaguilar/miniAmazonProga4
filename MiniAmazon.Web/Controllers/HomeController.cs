@@ -1,12 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using MiniAmazon.Domain;
 using Models;
 
 namespace MiniAmazon.Web.Controllers
 {
     public class HomeController : BootstrapBaseController
     {
+        public IRepository RepositoryParam { get; set; }
+
+        public HomeController(IRepository repositoryParam)
+        {
+            RepositoryParam = repositoryParam;
+        }
+
         private static List<HomeInputModel> _models = ModelIntializer.CreateHomeInputModels();
         public ActionResult Index()
         {
