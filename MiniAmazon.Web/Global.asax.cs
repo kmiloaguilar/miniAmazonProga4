@@ -1,15 +1,19 @@
 ﻿using System;
+using System.Configuration;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using AcklenAvenue.Data.NHibernate;
+using AutoMapper;
+using AutoMapper.Mappers;
 using BootstrapMvcSample;
 using BootstrapSupport;
 using FluentNHibernate.Cfg.Db;
 using MiniAmazon.Data;
 using MiniAmazon.Domain;
+using MiniAmazon.Web.Infrastructure;
 using NHibernate;
 using NHibernate.Context;
 using Ninject;
@@ -68,6 +72,7 @@ namespace MiniAmazon.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BootstrapBundleConfig.RegisterBundles(BundleTable.Bundles);
             ExampleLayoutsRouteConfig.RegisterRoutes(RouteTable.Routes);
+            AutoMapperConfiguration.Configure();
         }
 
         protected override IKernel CreateKernel()
@@ -77,6 +82,9 @@ namespace MiniAmazon.Web
 
             kernel.Bind<IRepository>().To<Repository>();
             kernel.Bind<ISession>().ToMethod(x => SessionFactory.GetCurrentSession());
+            kernel.Bind<IMappingEngine>().ToConstant(Mapper.Engine);
+            
+            
 
             return kernel;
         }

@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AutoMapper;
 using MiniAmazon.Domain;
 using MiniAmazon.Domain.Entities;
+using MiniAmazon.Web.Models;
+using AutoMapper.QueryableExtensions;
 
 namespace MiniAmazon.Web.Controllers
 {
     public class AccountController : BootstrapBaseController
     {
+        private readonly IMappingEngine _mappingEngine;
         private readonly IRepository _repository;
 
 
-        public AccountController(IRepository repository)
+        public AccountController(IRepository repository, IMappingEngine mappingEngine)
         {
             _repository = repository;
+            _mappingEngine = mappingEngine;
         }
 
         //
@@ -31,35 +34,23 @@ namespace MiniAmazon.Web.Controllers
 
         public ActionResult Index()
         {
-            var accounts = _repository.Query<Account>(x=>x.Email=="camilo.aguilar@me.com").ToList();
+            var accounts = _repository.Query<Account>(x => x.Email == "camilo.aguilar@me.com");
 
-            var accountInputModels = accounts.Select(account => new AccountInputModel
-                {
-                    Email = account.Email, Id = account.Id, Name = account.Name
-                }).ToList();
+            List<AccountInputModel> accountInputModels = accounts.Project().To<AccountInputModel>().ToList();
 
             return View(accountInputModels);
         }
 
+        //
+        // GET: /Account/Details/{id}
+
         public ActionResult Details(long id)
         {
             var account = _repository.GetById<Account>(id);
-            var accountInputModel = new AccountInputModel
-                {
-                    Email = account.Email,
-                    Id = account.Id,
-                    Name = account.Name
-                };
+
+            AccountInputModel accountInputModel = _mappingEngine.Map<Account, AccountInputModel>(account);
 
             return View(accountInputModel);
         }
-
-    }
-
-    public class AccountInputModel
-    {
-        public long Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
     }
 }
