@@ -8,12 +8,7 @@ namespace MiniAmazon.Web.Controllers
 {
     public class HomeController : BootstrapBaseController
     {
-        public IRepository RepositoryParam { get; set; }
-
-        public HomeController(IRepository repositoryParam)
-        {
-            RepositoryParam = repositoryParam;
-        }
+       
 
         private static List<HomeInputModel> _models = ModelIntializer.CreateHomeInputModels();
         public ActionResult Index()
