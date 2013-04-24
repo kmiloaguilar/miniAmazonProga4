@@ -2,7 +2,6 @@
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
-using MiniAmazon.Web.Infrastructure;
 
 namespace MiniAmazon.Web
 {
@@ -13,7 +12,6 @@ namespace MiniAmazon.Web
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-            DependencyResolver.SetResolver(new NinjectDependencyResolver());
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -1,4 +1,5 @@
 using DomainDrivenDatabaseDeployer;
+using MiniAmazon.Domain.Entities;
 using NHibernate;
 
 namespace MiniAmazon.DatabaseDeployer
@@ -14,7 +15,14 @@ namespace MiniAmazon.DatabaseDeployer
 
         public void Seed()
         {
-            //_session.Save(new Account{Name = ""});
+            var account = new Account
+                {
+                    Name = "Camilo",
+                    Email = "camilo.aguilar@me.com",
+                    Password = "pass123"
+                };
+
+            _session.Save(account);
         }
     }
 }

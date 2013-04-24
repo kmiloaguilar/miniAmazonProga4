@@ -13,8 +13,9 @@ namespace MiniAmazon.DatabaseDeployer
     {
         static void Main()
         {
+
             MsSqlConfiguration databaseConfiguration = MsSqlConfiguration.MsSql2008.ShowSql().
-                ConnectionString(x => x.FromConnectionStringWithKey("MiniAmazon"));
+                ConnectionString(x=> x.FromConnectionStringWithKey("MiniAmazon"));
 
             DomainDrivenDatabaseDeployer.DatabaseDeployer dd = null;
             ISessionFactory sessionFactory = new SessionFactoryBuilder(new MappingScheme(), databaseConfiguration)
@@ -32,8 +33,8 @@ namespace MiniAmazon.DatabaseDeployer
             {
                 dd.Seed(new List<IDataSeeder>
                             {
-                                //add data seeders here.
                                 new AccountSeeder(session),
+                                new SaleSeeder(session)
                             });
                 tx.Commit();
             }
