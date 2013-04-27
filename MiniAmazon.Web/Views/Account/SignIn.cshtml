@@ -1,14 +1,23 @@
-﻿@{
-    ViewBag.Title = "SignIn";
+﻿@model MiniAmazon.Web.Models.AccountSignInModel
+
+@{
+    ViewBag.Title = "Sign In";
     Layout = "~/Views/shared/_BootstrapLayout.empty.cshtml";
 }
 
-<form class="form-signin">
-        <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="input-block-level" placeholder="Email address">
-        <input type="password" class="input-block-level" placeholder="Password">
+
+@Html.BeginForm("SignIn","Account",FormMethod.Post,new {@class = "form-signin"})
+{
+    <h2 class="form-signin-heading">Please sign in</h2>
+
+    @Html.TextBoxFor(x=>x.Email, new {@class="input-block-level",@placeholder="Email address"})
+    @Html.PasswordFor(x=>x.Password, new {@class="input-block-level",@placeholder="Password"})
+        
         <label class="checkbox">
-          <input type="checkbox" value="remember-me"> Remember me
+          @Html.CheckBoxFor(x=>x.RememberMe) Remember me
         </label>
         <button class="btn btn-large btn-primary" type="submit">Sign in</button>
-</form>
+}
+
+       
+      

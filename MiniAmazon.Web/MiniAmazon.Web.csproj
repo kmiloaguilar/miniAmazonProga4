@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
     <Compile Include="Models\AccountInputModel.cs" />
+    <Compile Include="Models\AccountSignInModel.cs" />
     <Compile Include="Models\HomeInputModel.cs" />
     <Compile Include="NavigationRoutes\INavigationRouteFilter.cs" />
     <Compile Include="NavigationRoutes\NamedRoute.cs" />

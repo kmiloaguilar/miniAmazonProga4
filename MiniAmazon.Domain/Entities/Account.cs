@@ -12,6 +12,10 @@ namespace MiniAmazon.Domain.Entities
 
         public virtual string Password { get; set; }
 
+        public virtual int Age { get; set; }
+
+        public virtual string Genre { get; set; }
+
         public virtual IEnumerable<Sale> Sales
         {
             get { return _sales; }

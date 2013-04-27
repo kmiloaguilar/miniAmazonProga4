@@ -1,19 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using MiniAmazon.Domain;
 using MiniAmazon.Domain.Entities;
 using MiniAmazon.Web.Models;
-using AutoMapper.QueryableExtensions;
 
 namespace MiniAmazon.Web.Controllers
 {
     public class AccountController : BootstrapBaseController
     {
-        private readonly IMappingEngine _mappingEngine;
         private readonly IRepository _repository;
-
+        private readonly IMappingEngine _mappingEngine;
 
         public AccountController(IRepository repository, IMappingEngine mappingEngine)
         {
@@ -21,36 +17,42 @@ namespace MiniAmazon.Web.Controllers
             _mappingEngine = mappingEngine;
         }
 
-        //
-        // GET: /Account/SignIn
-
         public ActionResult SignIn()
         {
-            return View();
+            return View(new AccountSignInModel());
         }
 
-        //
-        // GET: /Account/Index
+        [HttpPost]
+        public ActionResult SignIn(AccountSignInModel accountSignInModel)
+        {
+            var account =
+                _repository.First<Account>(
+                    x => x.Email == accountSignInModel.Email && x.Password == accountSignInModel.Password);
+
+            if (account!=null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(accountSignInModel);
+        }
+
 
         public ActionResult Index()
         {
-            var accounts = _repository.Query<Account>(x => x.Email == "camilo.aguilar@me.com");
-
-            List<AccountInputModel> accountInputModels = accounts.Project().To<AccountInputModel>().ToList();
-
-            return View(accountInputModels);
+            throw new System.NotImplementedException();
         }
 
-        //
-        // GET: /Account/Details/{id}
-
-        public ActionResult Details(long id)
+        public ActionResult Create()
         {
-            var account = _repository.GetById<Account>(id);
+            return View(new AccountInputModel());
+        }
 
-            AccountInputModel accountInputModel = _mappingEngine.Map<Account, AccountInputModel>(account);
+        [HttpPost]
+        public ActionResult Create(AccountInputModel accountInputModel)
+        {
+            var account = _mappingEngine.Map<AccountInputModel, Account>(accountInputModel);
 
-            return View(accountInputModel);
+            return RedirectToAction("Dashboard","Sales");
         }
     }
 }
