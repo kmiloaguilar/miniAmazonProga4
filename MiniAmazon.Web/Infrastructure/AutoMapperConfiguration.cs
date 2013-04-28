@@ -10,7 +10,7 @@ namespace MiniAmazon.Web.Infrastructure
     {
         public static void Configure()
         {
-            Mapper.CreateMap<Account, AccountInputModel>();
+            Mapper.CreateMap<AccountInputModel, Account>();
         }
     }
 }
