@@ -1,8 +1,10 @@
 using System.Web.Mvc;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using MiniAmazon.Domain;
 using MiniAmazon.Domain.Entities;
 using MiniAmazon.Web.Models;
+
 
 namespace MiniAmazon.Web.Controllers
 {
@@ -36,10 +38,29 @@ namespace MiniAmazon.Web.Controllers
             return View(accountSignInModel);
         }
 
+        public ActionResult Edit(long id)
+        {
+            var account = _repository.GetById<Account>(id);
+            var accountInputModel = _mappingEngine.Map<Account, AccountInputModel>(account);
+            return View("Create",accountInputModel);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(AccountInputModel accountInputModel, long id)
+        {
+            var account = _repository.GetById<Account>(id);
+            account = _mappingEngine.Map<AccountInputModel, Account>(accountInputModel);
+
+            Success("User {0} has been updated");
+            return View("Create",accountInputModel);
+        }
+
 
         public ActionResult Index()
         {
-            throw new System.NotImplementedException();
+            var account = _repository.Query<Account>(x => x == x);
+            var accountInputModelList = account.Project().To<AccountInputModel>();
+            return View(accountInputModelList);
         }
 
         public ActionResult Create()
