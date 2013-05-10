@@ -30,6 +30,12 @@ namespace MiniAmazon.Web.Controllers
             return View(new AccountSignInModel());
         }
 
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("SignIn");
+        }
+
         [HttpPost]
         public ActionResult SignIn(AccountSignInModel accountSignInModel)
         {
@@ -41,7 +47,8 @@ namespace MiniAmazon.Web.Controllers
 
             if (account!=null)
             {
-               // FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
+
+                FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
                 SetAuthenticationCookie(accountSignInModel.Email,new List<string>{"Admin","Patito"});
                 return RedirectToAction("Index");
             }
@@ -66,7 +73,7 @@ namespace MiniAmazon.Web.Controllers
             return View("Create",accountInputModel);
         }
 
-
+        [Authorize]
         public ActionResult Index()
         {
             var account = _repository.Query<Account>(x => true).ToList();
