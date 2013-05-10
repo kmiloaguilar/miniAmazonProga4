@@ -1,6 +1,13 @@
 @using BootstrapSupport
 @model System.Collections.IEnumerable   
-    <h4>@Model.GetLabel() <small>Listing</small></h4>
+<h4>@Model.GetLabel() <small>Listing</small></h4>
+<br/>
+Is in admin role: @User.IsInRole("Admin").ToString();
+<br/>
+Is in otro role: @User.IsInRole("Otro").ToString();
+<br/>
+Is in patito role: @User.IsInRole("Patito").ToString();
+<br/>
 <table class="table table-striped">
     <caption></caption>
     <thead>

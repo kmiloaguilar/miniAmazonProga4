@@ -6,6 +6,8 @@ namespace MiniAmazon.Domain.Entities
     {
         private readonly IList<Sale> _sales = new List<Sale>();
 
+        private readonly IList<Role> _roles = new List<Role>(); 
+
         public virtual string Name { get; set; }
 
         public virtual string Email { get; set; }
@@ -15,6 +17,11 @@ namespace MiniAmazon.Domain.Entities
         public virtual int Age { get; set; }
 
         public virtual string Genre { get; set; }
+
+        public virtual IEnumerable<Role> Roles
+        {
+            get { return _roles; }
+        } 
 
         public virtual IEnumerable<Sale> Sales
         {
@@ -26,6 +33,14 @@ namespace MiniAmazon.Domain.Entities
         public virtual long Id { get; set; }
 
         #endregion
+
+        public virtual void AddRole(Role role)
+        {
+            if (!_roles.Contains(role))
+            {
+                _roles.Add(role);
+            }
+        }
 
         public virtual void AddSale(Sale sale)
         {

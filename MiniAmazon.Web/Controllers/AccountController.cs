@@ -1,4 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Principal;
 using System.Web.Mvc;
+using System.Web.Security;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using MiniAmazon.Domain;
@@ -19,6 +23,8 @@ namespace MiniAmazon.Web.Controllers
             _mappingEngine = mappingEngine;
         }
 
+        
+
         public ActionResult SignIn()
         {
             return View(new AccountSignInModel());
@@ -31,10 +37,15 @@ namespace MiniAmazon.Web.Controllers
                 _repository.First<Account>(
                     x => x.Email == accountSignInModel.Email && x.Password == accountSignInModel.Password);
 
+            
+
             if (account!=null)
             {
+               // FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
+                SetAuthenticationCookie(accountSignInModel.Email,new List<string>{"Admin","Patito"});
                 return RedirectToAction("Index");
             }
+            Error("Email and/or password incorrect");
             return View(accountSignInModel);
         }
 
@@ -58,9 +69,10 @@ namespace MiniAmazon.Web.Controllers
 
         public ActionResult Index()
         {
-            var account = _repository.Query<Account>(x => x == x);
-            var accountInputModelList = account.Project().To<AccountInputModel>();
-            return View(accountInputModelList);
+            var account = _repository.Query<Account>(x => true).ToList();
+            //var accountInputModelList = account.Project().To<AccountInputModel>();
+            return View(account);
+            //return View(accountInputModelList);
         }
 
         public ActionResult Create()
