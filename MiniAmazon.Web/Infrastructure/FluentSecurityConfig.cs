@@ -12,6 +12,7 @@ namespace MiniAmazon.Web.Infrastructure
     {
         public static void Configure()
         {
+
             SecurityConfigurator.Configure(configuration =>
             {
                 configuration.GetAuthenticationStatusFrom(() => HttpContext.Current.User.Identity.IsAuthenticated);
