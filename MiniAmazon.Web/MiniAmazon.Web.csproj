@@ -2,6 +2,29 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+	
+	
+<!-- MSpec -->
+<MSpecPath>$(Packages)\Machine.Specifications.0.5.12\tools</MSpecPath>
+<MSpecExe>mspec-clr4.exe</MSpecExe>
+<MSpecXmlOutputFile>$(ReportsPath)\mspec-output.xml</MSpecXmlOutputFile>
+<MSpecHtmlOutputPath>$(ReportsPath)\mspec</MSpecHtmlOutputPath>
+<MSpecSettings></MSpecSettings>
+</PropertyGroup>
+ 
+<Target Name="Specs" DependsOnTargets="Clean;LoadNuGetPackages;Compile">
+<CreateItem Include="**\bin\$(Configuration)\*Specs*.dll" Exclude="**\bin\$(Configuration)\*Specs*.mm.dll">
+<Output TaskParameter="Include" ItemName="SpecsAssemblies" />
+</CreateItem>
+ 
+<PropertyGroup>
+<MSpecCommand>&quot;$(MSpecPath)\$(MSpecExe)&quot; $(MSpecSettings) --xml &quot;$(MSpecXmlOutputFile)&quot; --html &quot;$(MSpecHtmlOutputPath)&quot; -t &quot;@(SpecsAssemblies, '&quot; &quot;')&quot;</MSpecCommand>
+</PropertyGroup>
+<Message Importance="high" Text="Running Specs with this command: $(MSpecCommand)"/>
+<Exec Command="$(MSpecCommand)" />
+</Target>
+
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>
