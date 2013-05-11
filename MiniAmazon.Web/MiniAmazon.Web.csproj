@@ -57,6 +57,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MiniAmazon.Data\bin\Debug\FluentNHibernate.dll</HintPath>
     </Reference>
+    <Reference Include="FluentSecurity">
+      <HintPath>..\packages\FluentSecurity.1.4.0\lib\FluentSecurity.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Mvc">
       <HintPath>..\packages\Mvc4Futures.4.0.20710.0\lib\net40\Microsoft.Web.Mvc.dll</HintPath>
@@ -169,6 +172,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutoMapperConfiguration.cs" />
+    <Compile Include="Infrastructure\FluentSecurityConfig.cs" />
     <Compile Include="Models\AccountInputModel.cs" />
     <Compile Include="Models\AccountSignInModel.cs" />
     <Compile Include="Models\HomeInputModel.cs" />
