@@ -13,9 +13,9 @@ namespace BootstrapMvcSample
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-            routes.MapNavigationRoute<HomeController>("Home", c => c.Index());
-            routes.MapNavigationRoute<HomeController>("Create User", c => c.Index());
-            routes.MapNavigationRoute<HomeController>("Logout", c => c.Index());
+            routes.MapNavigationRoute<AccountController>("All Users", c => c.Index());
+            routes.MapNavigationRoute<AccountController>("Create User", c => c.Create());
+            routes.MapNavigationRoute<AccountController>("Logout", c => c.LogOut());
 
             /*routes.MapNavigationRoute<ExampleLayoutsController>("Example Layouts", c => c.Starter())
                   .AddChildRoute<ExampleLayoutsController>("Marketing", c => c.Marketing())

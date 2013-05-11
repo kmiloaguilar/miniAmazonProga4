@@ -58,7 +58,7 @@ namespace MiniAmazon.Web
         public static ISessionFactory CreateSessionFactory()
         {
             MsSqlConfiguration databaseConfiguration = MsSqlConfiguration.MsSql2008.ShowSql().
-                ConnectionString(x => x.FromConnectionStringWithKey("MiniAmazon"));
+                ConnectionString(x => x.FromConnectionStringWithKey("MiniAmazon.Remote"));
             ISessionFactory sessionFactory = new SessionFactoryBuilder(new MappingScheme(), databaseConfiguration)
                 .Build();
 
@@ -75,6 +75,7 @@ namespace MiniAmazon.Web
             BootstrapBundleConfig.RegisterBundles(BundleTable.Bundles);
             ExampleLayoutsRouteConfig.RegisterRoutes(RouteTable.Routes);
             AutoMapperConfiguration.Configure();
+            FluentSecurityConfig.Configure();
         }
 
         protected override IKernel CreateKernel()

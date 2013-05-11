@@ -18,9 +18,6 @@ namespace MiniAmazon.Web.Infrastructure
 
                 configuration.ForAllControllers().DenyAnonymousAccess();
                 configuration.For<AccountController>(x => x.SignIn()).Ignore();
-
-                //configuration.IgnoreMissingConfiguration(); Para que no devuelva exceptiones.
-
                 configuration.ResolveServicesUsing(type =>
                 {
                     if (type == typeof(IPolicyViolationHandler))

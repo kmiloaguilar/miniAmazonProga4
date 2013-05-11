@@ -43,15 +43,14 @@ namespace MiniAmazon.Web.Controllers
                 _repository.First<Account>(
                     x => x.Email == accountSignInModel.Email && x.Password == accountSignInModel.Password);
 
-            
-
             if (account!=null)
             {
 
-                FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
+                //FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
                 SetAuthenticationCookie(accountSignInModel.Email,new List<string>{"Admin","Patito"});
                 return RedirectToAction("Index");
             }
+
             Error("Email and/or password incorrect");
             return View(accountSignInModel);
         }
@@ -91,8 +90,8 @@ namespace MiniAmazon.Web.Controllers
         public ActionResult Create(AccountInputModel accountInputModel)
         {
             var account = _mappingEngine.Map<AccountInputModel, Account>(accountInputModel);
-
-            return RedirectToAction("Dashboard","Sales");
+            Information("This method is not implemented");
+            return View(accountInputModel);
         }
     }
 }

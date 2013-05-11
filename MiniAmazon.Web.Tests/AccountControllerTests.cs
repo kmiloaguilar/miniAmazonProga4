@@ -8,7 +8,7 @@ using Moq;
 namespace MiniAmazon.Web.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class AccountControllerTests
     {
         [TestMethod]
         public void WhenCreatingNewInstanceForAccountController()
