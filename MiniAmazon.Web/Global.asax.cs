@@ -58,7 +58,7 @@ namespace MiniAmazon.Web
         public static ISessionFactory CreateSessionFactory()
         {
             MsSqlConfiguration databaseConfiguration = MsSqlConfiguration.MsSql2008.ShowSql().
-                ConnectionString(x => x.FromConnectionStringWithKey("MiniAmazon.Remote"));
+                ConnectionString(x => x.FromConnectionStringWithKey("MiniAmazon.Local"));
             ISessionFactory sessionFactory = new SessionFactoryBuilder(new MappingScheme(), databaseConfiguration)
                 .Build();
 

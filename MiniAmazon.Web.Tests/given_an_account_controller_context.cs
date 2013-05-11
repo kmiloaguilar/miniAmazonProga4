@@ -8,7 +8,7 @@ using MiniAmazon.Domain;
 using MiniAmazon.Web.Controllers;
 using Moq;
 
-namespace MiniAmazon.Web.Specs
+namespace MiniAmazon.Web.Tests
 {
     public class given_an_account_controller_context
     {

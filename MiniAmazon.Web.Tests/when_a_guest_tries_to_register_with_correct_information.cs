@@ -6,7 +6,7 @@ using Machine.Specifications.Mvc;
 using MiniAmazon.Domain.Entities;
 using MiniAmazon.Web.Models;
 
-namespace MiniAmazon.Web.Specs
+namespace MiniAmazon.Web.Tests
 {
     public class when_a_guest_tries_to_register_with_correct_information : given_an_account_controller_context
     {

@@ -46,7 +46,7 @@ namespace MiniAmazon.Web.Controllers
             if (account!=null)
             {
 
-                //FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
+                FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
                 SetAuthenticationCookie(accountSignInModel.Email,new List<string>{"Admin","Patito"});
                 return RedirectToAction("Index");
             }
