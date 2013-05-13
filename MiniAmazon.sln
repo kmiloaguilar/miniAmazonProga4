@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniAmazon.Domain", "MiniAm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniAmazon.DatabaseDeployer", "MiniAmazon.DatabaseDeployer\MiniAmazon.DatabaseDeployer.csproj", "{98AD66B0-A3AD-48C6-91E5-1D6B74185AD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniAmazon.Web.Tests", "MiniAmazon.Web.Tests\MiniAmazon.Web.Tests.csproj", "{C1BEE134-8A55-4BA8-BDBC-F1AD7598C5F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniAmazon.Web.Specs", "MiniAmazon.Web.Specs\MiniAmazon.Web.Specs.csproj", "{C1BEE134-8A55-4BA8-BDBC-F1AD7598C5F3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniAmazon.Domain.Specs", "MiniAmazon.Domain.Specs\MiniAmazon.Domain.Specs.csproj", "{8413A468-EDD1-4E41-9D52-1FAFBE2845E8}"
 EndProject

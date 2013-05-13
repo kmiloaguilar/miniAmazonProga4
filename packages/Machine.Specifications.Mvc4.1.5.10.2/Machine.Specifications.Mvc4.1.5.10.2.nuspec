@@ -20,8 +20,5 @@ v1.0.2.0 - Added support for Partial View (ShouldBeAPartialView)</description>
     <dependencies>
       <dependency id="Machine.Specifications" version="0.5.10" />
     </dependencies>
-    <references>
-      <reference file="Machine.Specifications.Mvc.dll" />
-    </references>
   </metadata>
 </package>

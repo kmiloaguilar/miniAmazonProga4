@@ -3,7 +3,7 @@ using Machine.Specifications;
 using Machine.Specifications.Mvc;
 using MiniAmazon.Web.Models;
 
-namespace MiniAmazon.Web.Tests
+namespace MiniAmazon.Web.Specs
 {
     public class when_guest_wants_to_signin : given_an_account_controller_context
     {

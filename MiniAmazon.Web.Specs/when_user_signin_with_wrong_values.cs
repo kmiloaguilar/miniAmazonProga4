@@ -3,7 +3,7 @@ using Machine.Specifications;
 using Machine.Specifications.Mvc;
 using MiniAmazon.Web.Models;
 
-namespace MiniAmazon.Web.Tests
+namespace MiniAmazon.Web.Specs
 {
     public class when_user_signin_with_wrong_values : given_an_account_controller_context
     {

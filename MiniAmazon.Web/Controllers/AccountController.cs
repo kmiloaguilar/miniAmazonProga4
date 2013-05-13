@@ -23,8 +23,6 @@ namespace MiniAmazon.Web.Controllers
             _mappingEngine = mappingEngine;
         }
 
-        
-
         public ActionResult SignIn()
         {
             return View(new AccountSignInModel());
@@ -45,7 +43,6 @@ namespace MiniAmazon.Web.Controllers
 
             if (account!=null)
             {
-
                 FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
                 SetAuthenticationCookie(accountSignInModel.Email,new List<string>{"Admin","Patito"});
                 return RedirectToAction("Index");
