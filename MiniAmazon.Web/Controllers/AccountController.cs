@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
@@ -23,16 +24,21 @@ namespace MiniAmazon.Web.Controllers
             _mappingEngine = mappingEngine;
         }
 
-        public ActionResult SignIn()
-        {
-            return View(new AccountSignInModel());
-        }
-
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("SignIn");
         }
+
+        public ActionResult SignIn(string error = null)
+        {
+            if (!String.IsNullOrEmpty(error))
+            {
+                Error(error);
+            }
+            return View(new AccountSignInModel());
+        }
+
 
         [HttpPost]
         public ActionResult SignIn(AccountSignInModel accountSignInModel)
@@ -40,11 +46,15 @@ namespace MiniAmazon.Web.Controllers
             var account =
                 _repository.First<Account>(
                     x => x.Email == accountSignInModel.Email && x.Password == accountSignInModel.Password);
+            
+
 
             if (account!=null)
             {
+                
+                List<string> roles = account.Roles.Select(x => x.Name).ToList();
                 FormsAuthentication.SetAuthCookie(accountSignInModel.Email, accountSignInModel.RememberMe);
-                SetAuthenticationCookie(accountSignInModel.Email,new List<string>{"Admin","Patito"});
+                SetAuthenticationCookie(accountSignInModel.Email,roles);
                 return RedirectToAction("Index");
             }
 

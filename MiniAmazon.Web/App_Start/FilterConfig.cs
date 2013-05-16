@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using FluentSecurity;
 
 namespace MiniAmazon.Web
 {
@@ -7,6 +8,7 @@ namespace MiniAmazon.Web
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
+            filters.Add(new HandleSecurityAttribute(), 0);
             filters.Add(new HandleErrorAttribute());
         }
     }

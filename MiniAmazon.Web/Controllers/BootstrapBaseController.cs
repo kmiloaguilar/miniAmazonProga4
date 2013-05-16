@@ -58,7 +58,7 @@ namespace MiniAmazon.Web.Controllers
 
 
             HttpContext.Response.Cookies.Add(authCookie);
-            //HttpContext.Current.Current.Response.Cookies.Add(authCookie);
+           
         }
     }
 }

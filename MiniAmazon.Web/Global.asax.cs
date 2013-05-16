@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Configuration;
 using System.Reflection;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -9,7 +9,6 @@ using System.Web.Routing;
 using System.Web.Security;
 using AcklenAvenue.Data.NHibernate;
 using AutoMapper;
-using AutoMapper.Mappers;
 using BootstrapMvcSample;
 using BootstrapSupport;
 using FluentNHibernate.Cfg.Db;
@@ -58,7 +57,7 @@ namespace MiniAmazon.Web
         public static ISessionFactory CreateSessionFactory()
         {
             MsSqlConfiguration databaseConfiguration = MsSqlConfiguration.MsSql2008.ShowSql().
-                ConnectionString(x => x.FromConnectionStringWithKey("MiniAmazon.Remote"));
+                ConnectionString(x => x.FromConnectionStringWithKey("MiniAmazon.Local"));
             ISessionFactory sessionFactory = new SessionFactoryBuilder(new MappingScheme(), databaseConfiguration)
                 .Build();
 
@@ -70,12 +69,12 @@ namespace MiniAmazon.Web
             base.OnApplicationStarted();
             AreaRegistration.RegisterAllAreas();
             WebApiConfig.Register(GlobalConfiguration.Configuration);
+            FluentSecurityConfig.Configure();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BootstrapBundleConfig.RegisterBundles(BundleTable.Bundles);
             ExampleLayoutsRouteConfig.RegisterRoutes(RouteTable.Routes);
             AutoMapperConfiguration.Configure();
-            FluentSecurityConfig.Configure();
         }
 
         protected override IKernel CreateKernel()
@@ -86,40 +85,32 @@ namespace MiniAmazon.Web
             kernel.Bind<IRepository>().To<Repository>();
             kernel.Bind<ISession>().ToMethod(x => SessionFactory.GetCurrentSession());
             kernel.Bind<IMappingEngine>().ToConstant(Mapper.Engine);
-            
-            
+
 
             return kernel;
         }
 
         protected void Application_AuthenticateRequest(Object sender, EventArgs e)
         {
-
             if (Context.User != null)
             {
-
                 string cookieName = FormsAuthentication.FormsCookieName;
 
                 HttpCookie authCookie = Context.Request.Cookies[cookieName];
-
                 if (authCookie == null)
 
                     return;
 
 
-
                 FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
 
-                string[] roles = authTicket.UserData.Split(new char[] { '|' });
+                string[] roles = authTicket.UserData.Split(new[] {'|'});
 
 
+                var fi = (FormsIdentity) (Context.User.Identity);
 
-                FormsIdentity fi = (FormsIdentity)(Context.User.Identity);
-
-                Context.User = new System.Security.Principal.GenericPrincipal(fi, roles);
-
+                Context.User = new GenericPrincipal(fi, roles);
             }
-
         }
     }
 }

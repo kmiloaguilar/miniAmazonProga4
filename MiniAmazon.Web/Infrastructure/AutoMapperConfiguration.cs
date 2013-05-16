@@ -11,6 +11,8 @@ namespace MiniAmazon.Web.Infrastructure
         public static void Configure()
         {
             Mapper.CreateMap<AccountInputModel, Account>();
+            Mapper.CreateMap<Account, AccountInputModel>();
+
         }
     }
 }
