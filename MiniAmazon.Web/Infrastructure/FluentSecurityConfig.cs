@@ -18,7 +18,7 @@ namespace MiniAmazon.Web.Infrastructure
 
                 configuration.ForAllControllers().DenyAnonymousAccess();
                 configuration.For<AccountController>(x => x.SignIn("")).Ignore();
-                configuration.For<HomeController>(x => x.Create()).RequireRole(new object[] {"Admin1"});
+                configuration.For<HomeController>(x => x.Create()).RequireRole(new object[] {"Admin"});
                 configuration.ResolveServicesUsing(type =>
                 {
                     if (type == typeof(IPolicyViolationHandler))

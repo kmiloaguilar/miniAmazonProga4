@@ -15,7 +15,7 @@ namespace MiniAmazon.DatabaseDeployer
         {
 
             MsSqlConfiguration databaseConfiguration = MsSqlConfiguration.MsSql2008.ShowSql().
-                ConnectionString(x=> x.FromConnectionStringWithKey("MiniAmazon.Local"));
+                ConnectionString(x=> x.FromConnectionStringWithKey("MiniAmazon.Remote"));
 
             DomainDrivenDatabaseDeployer.DatabaseDeployer dd = null;
             ISessionFactory sessionFactory = new SessionFactoryBuilder(new MappingScheme(), databaseConfiguration)
